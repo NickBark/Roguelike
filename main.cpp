@@ -10,12 +10,11 @@ int main(void) {
     initscr(); // инициализируем "курсы"
     noecho(); // отключаем экранизацию при нажатии кнопок
     curs_set(0); // выключаем отображение курсора
-    keypad(stdscr, TRUE); // разрещаем стрелки
+    keypad(stdscr, TRUE); // разрешаем стрелки
 
+    int c = 0;
     mvaddstr(mag.get_y(), mag.get_x(), mag.get_avatar());
-
-    while (1) {
-        int c = getch();
+    while ((c = getch()) && c != 27) { // 27 - ESC
         mvaddstr(mag.get_y(), mag.get_x(), " ");
         move(c, mag.get_x(), mag.get_y());
         mvaddstr(mag.get_y(), mag.get_x(), mag.get_avatar());
