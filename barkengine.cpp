@@ -15,20 +15,21 @@ Village::~Village() {
         delete[] barrier[i];
     }
     delete[] barrier;
-    cout << "DONE" << endl;
 }
 
 void move(int& c, int& x, int& y, int const& x_max, int const& y_max,
           Village& obj) {
-    if (obj.get_m() != 0) {
-    }
-    if ((c == 'w' || c == KEY_UP) && y != 0) {
+    if ((c == 'w' || c == KEY_UP) && y != 0 &&
+        !obj.get_barrier_elem(x, y - 1)) {
         y--;
-    } else if ((c == 's' || c == KEY_DOWN) && y != y_max - 1) {
+    } else if ((c == 's' || c == KEY_DOWN) && y != y_max - 1 &&
+               !obj.get_barrier_elem(x, y + 1)) {
         y++;
-    } else if ((c == 'a' || c == KEY_LEFT) && x != 0) {
+    } else if ((c == 'a' || c == KEY_LEFT) && x != 0 &&
+               !obj.get_barrier_elem(x - 1, y)) {
         x--;
-    } else if ((c == 'd' || c == KEY_RIGHT) && x != x_max - 1) {
+    } else if ((c == 'd' || c == KEY_RIGHT) && x != x_max - 1 &&
+               !obj.get_barrier_elem(x + 1, y)) {
         x++;
     }
 }

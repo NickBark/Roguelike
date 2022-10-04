@@ -12,6 +12,7 @@ class Village {
     size_t const& get_n() { return n; }
     size_t const& get_m() { return m; }
     char& get_data_elem(int x, int y) { return data[x][y]; }
+    int& get_barrier_elem(int x, int y) { return barrier[x][y]; }
     char**& get_data() { return data; }
 
   private:

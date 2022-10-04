@@ -11,6 +11,11 @@ int main(void) {
     int const rows = 50;
     int const cols = 25;
 
+    initscr(); // инициализируем "курсы"
+    noecho(); // отключаем экранизацию при нажатии кнопок
+    curs_set(0); // выключаем отображение курсора
+    keypad(stdscr, TRUE); // разрешаем стрелки
+
     Protagonist mag;
     Village brin(rows, cols);
 
@@ -18,17 +23,13 @@ int main(void) {
         for (size_t j = 0; j < brin.get_m(); j++) {
             if (i >= 5 && i <= 10 && j >= 4 && j <= 9) {
                 brin.get_data_elem(i, j) = '^';
+                brin.get_barrier_elem(i, j) = 1;
             } else {
                 brin.get_data_elem(i, j) = '_';
+                brin.get_barrier_elem(i, j) = 0;
             }
         }
     }
-
-    initscr(); // инициализируем "курсы"
-    noecho(); // отключаем экранизацию при нажатии кнопок
-    curs_set(0); // выключаем отображение курсора
-    keypad(stdscr, TRUE); // разрешаем стрелки
-
     int c = 0;
     // int old_x = 0;
     // int old_y = 0;
@@ -40,9 +41,9 @@ int main(void) {
         }
         addch('\n');
     }
-    // mvaddch(mag.get_y(), mag.get_x(), mag.get_avatar());
+    mvaddch(mag.get_y(), mag.get_x(), mag.get_avatar());
 
-    mvprintw(mag.get_y(), mag.get_x(), "🧙");
+    // mvprintw(mag.get_y(), mag.get_x(), "🧙");
 
     // old_x = mag.get_x();
     // old_y = mag.get_y();
@@ -56,11 +57,11 @@ int main(void) {
             }
             addch('\n');
         }
-    
+
         move(c, mag.get_x(), mag.get_y(), brin.get_n(), brin.get_m(), brin);
 
-        // mvaddch(mag.get_y(), mag.get_x(), mag.get_avatar());
-        mvprintw(mag.get_y(), mag.get_x(), "🧙");
+        mvaddch(mag.get_y(), mag.get_x(), mag.get_avatar());
+        // mvprintw(mag.get_y(), mag.get_x(), "🧙");
         // mvaddch(old_y, old_x, old_symb);
 
         // old_x = mag.get_x();
