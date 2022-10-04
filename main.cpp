@@ -2,15 +2,25 @@
 #include "dependencies.hpp"
 #include "protagonist.hpp"
 
+// сделать barrier обычной функцией, посмотреть исправит ли это ошибку
+// сегментации
+
 int main(void) {
     setlocale(LC_ALL, "");
 
-    Protagonist mag;
-    Village brin(25, 50);
+    int const rows = 25;
+    int const cols = 50;
 
-    for (size_t i = 0; i != brin.get_n(); i++) {
+    Protagonist mag;
+    Village brin(rows, cols);
+
+    for (size_t i = 0; i < brin.get_n(); i++) {
         for (size_t j = 0; j < brin.get_m(); j++) {
-            brin.get_data_elem(i, j) = '_';
+            if (i >= 5 && i <= 10 && j >= 4 && j <= 9) {
+                brin.get_data_elem(i, j) = '^';
+            } else {
+                brin.get_data_elem(i, j) = '_';
+            }
         }
     }
 
@@ -26,12 +36,18 @@ int main(void) {
         }
         addch('\n');
     }
-    mvaddstr(mag.get_y(), mag.get_x(), mag.get_avatar());
+    mvaddch(mag.get_y(), mag.get_x(), mag.get_avatar());
+
     while ((c = getch()) && c != 27) { // 27 - ESC
-        // clear();
-        mvaddch(mag.get_y(), mag.get_x(), brin.get_data_elem(0, 0));
-        move(c, mag.get_x(), mag.get_y(), brin.get_m(), brin.get_n());
-        mvaddstr(mag.get_y(), mag.get_x(), mag.get_avatar());
+        clear();
+        for (size_t i = 0; i != brin.get_n(); i++) {
+            for (size_t j = 0; j < brin.get_m(); j++) {
+                addch(brin.get_data_elem(i, j));
+            }
+            addch('\n');
+        }
+        move(c, mag.get_x(), mag.get_y(), brin.get_m(), brin.get_n(), brin);
+        mvaddch(mag.get_y(), mag.get_x(), mag.get_avatar());
     }
     endwin();
 
