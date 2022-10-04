@@ -2,6 +2,7 @@
 #define BARKENGINE_HPP
 
 #include "dependencies.hpp"
+#include "protagonist.hpp"
 
 class Village {
   public:
@@ -22,8 +23,8 @@ class Village {
     char** data;
 };
 
-void move(int& c, int& x, int& y, int const& x_max, int const& y_max,
-          Village& obj);
+void movement(int& c, int& x, int& y, int const& x_max, int const& y_max,
+              Village& obj, Protagonist& mag);
 void allot_map_paint(char**& arr, size_t const& n, size_t const& m);
 void allot_map_barrier(int**& arr, size_t const& n, size_t const& m);
 
