@@ -1,20 +1,12 @@
 #include "barkengine.hpp"
 
-Village::Village(size_t n, size_t m) : n(n), m(m) {
-    allot_map_paint(data, n, m);
-    allot_map_barrier(barrier, n, m);
-}
+Village::Village(size_t n, size_t m) : n(n), m(m) { allot_cell(cell, n, m); }
 
 Village::~Village() {
     for (size_t i = 0; i < n; i++) {
-        delete[] data[i];
+        delete[] cell[i];
     }
-    delete[] data;
-
-    for (size_t i = 0; i < n; i++) {
-        delete[] barrier[i];
-    }
-    delete[] barrier;
+    delete[] cell;
 }
 
 void movement(int& c, int& x, int& y, int const& x_max, int const& y_max,
@@ -49,16 +41,23 @@ void movement(int& c, int& x, int& y, int const& x_max, int const& y_max,
     // mvprintw(mag.get_y(), mag.get_x(), "🧙");
 }
 
-void allot_map_paint(char**& arr, size_t const& n, size_t const& m) {
-    arr = new char*[n];
+void allot_cell(Cell**& arr, size_t const& n, size_t const& m) {
+    arr = new Cell*[n];
     for (size_t i = 0; i < n; i++) {
-        arr[i] = new char[m];
+        arr[i] = new Cell[m];
     }
 }
 
-void allot_map_barrier(int**& arr, size_t const& n, size_t const& m) {
-    arr = new int*[n];
-    for (size_t i = 0; i < n; i++) {
-        arr[i] = new int[m];
-    }
-}
+// void allot_map_paint(char**& arr, size_t const& n, size_t const& m) {
+//     arr = new char*[n];
+//     for (size_t i = 0; i < n; i++) {
+//         arr[i] = new char[m];
+//     }
+// }
+
+// void allot_map_barrier(int**& arr, size_t const& n, size_t const& m) {
+//     arr = new int*[n];
+//     for (size_t i = 0; i < n; i++) {
+//         arr[i] = new int[m];
+//     }
+// }

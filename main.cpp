@@ -16,13 +16,15 @@ int main(void) {
     noecho(); // отключаем экранизацию при нажатии кнопок
     curs_set(0); // выключаем отображение курсора
     keypad(stdscr, TRUE);         // разрешаем стрелки
-    getmaxyx(stdscr, cols, rows); // размер консоли
+    // getmaxyx(stdscr, cols, rows); // размер консоли
 
     // rows = rand() % rows;
     // cols = rand() % cols;
 
     Protagonist mag;
+    Protagonist goblin;
     Village brin(rows, cols);
+    goblin.get_avatar() = 't';
 
     for (size_t i = 0; i < brin.get_n(); i++) {
         for (size_t j = 0; j < brin.get_m(); j++) {
@@ -50,6 +52,14 @@ int main(void) {
         }
         addch('\n');
     }
+
+    do{
+        goblin.get_x() = rand() % rows;
+        goblin.get_y() = rand() % cols;
+    }
+    while(brin.get_barrier_elem(goblin.get_x(), goblin.get_y()));
+
+    mvaddch(goblin.get_y(), goblin.get_x(), goblin.get_avatar());
     mvaddch(mag.get_y(), mag.get_x(), mag.get_avatar());
     // mvprintw(mag.get_y(), mag.get_x(), "🧙");
 

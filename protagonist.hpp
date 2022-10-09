@@ -13,7 +13,7 @@ class Protagonist {
     int& get_old_y() { return old_y; }
     char& get_old_symb() { return old_symb; }
 
-    char get_avatar() const { return avatar; }
+    char& get_avatar() { return avatar; }
 
   private:
     char avatar;
