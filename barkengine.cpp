@@ -48,16 +48,11 @@ void allot_cell(Cell**& arr, size_t const& n, size_t const& m) {
     }
 }
 
-// void allot_map_paint(char**& arr, size_t const& n, size_t const& m) {
-//     arr = new char*[n];
-//     for (size_t i = 0; i < n; i++) {
-//         arr[i] = new char[m];
-//     }
-// }
-
-// void allot_map_barrier(int**& arr, size_t const& n, size_t const& m) {
-//     arr = new int*[n];
-//     for (size_t i = 0; i < n; i++) {
-//         arr[i] = new int[m];
-//     }
-// }
+void Village::print_village() {
+    for (size_t i = 0; i < this->get_n(); i++) {
+        for (size_t j = 0; j < this->get_m(); j++) {
+            mvprintw(j, i, "%c", this->get_data_elem(i, j));
+        }
+        addch('\n');
+    }
+}
