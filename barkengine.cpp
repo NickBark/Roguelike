@@ -53,6 +53,22 @@ void Village::print_village() {
         for (size_t j = 0; j < this->get_m(); j++) {
             mvprintw(j, i, "%c", this->get_data_elem(i, j));
         }
-        addch('\n');
+        printw("\n");
+    }
+}
+
+void Village::room(size_t& rx, size_t& ry, size_t& rx_max, size_t& ry_max) {
+    rx = rand() % (this->get_n() - 3);
+    ry = rand() % (this->get_m() - 3);
+    rx_max = rand() % 5 + 4;
+    ry_max = rand() % 10 + 8;
+
+    for (size_t i = rx; i < rx + rx_max; i++) {
+        for (size_t j = ry; j < ry + ry_max; j++) {
+            if (i > this->get_n() - 2 || j > this->get_m() - 2 || i < 1 || j < 1)
+                continue;
+            this->get_data_elem(i, j) = ' ';
+            this->get_barrier_elem(i, j) = 0;
+        }
     }
 }

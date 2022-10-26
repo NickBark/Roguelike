@@ -18,6 +18,7 @@ class Village : public Cell {
     Cell**& get_data() { return cell; }
 
     void print_village();
+    void room(size_t& rx, size_t& ry, size_t& rx_max, size_t& ry_max);
 
   private:
     size_t const n; // строки
@@ -28,6 +29,6 @@ class Village : public Cell {
 void movement(int& c, int& x, int& y, int const& x_max, int const& y_max,
               Village& obj, Protagonist& mag);
 
-void allot_cell(Cell **& arr, size_t const& n, size_t const& m);
+void allot_cell(Cell**& arr, size_t const& n, size_t const& m);
 
 #endif // BARKENGINE_HPP
